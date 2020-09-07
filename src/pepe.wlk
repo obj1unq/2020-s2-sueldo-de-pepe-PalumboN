@@ -3,9 +3,13 @@
 
 object pepe {
 	var categoria = gerente
+	var bonoResultados = nulo
 	
 	method categoria(nuevaCategoria) {
 		categoria = nuevaCategoria
+	}
+	method bonoResultados(nuevoBono) {
+		bonoResultados = nuevoBono
 	}
 	
 	method sueldo() {
@@ -13,11 +17,11 @@ object pepe {
 	}
 	
 	method sueldoNeto() {
-		return categoria.valor()
+		return categoria.neto()
 	}
 	
 	method sueldoPorResultados() {
-		return 0 
+		return bonoResultados.montoResultados(self)
 	}
 	
 	method sueldoPorPresentismo() {
@@ -26,17 +30,45 @@ object pepe {
 }
 
 // CATEGORIAS
-
 object gerente {
-	method valor() { return 15000 }
+	method neto() { return 15000 }
 }
 
 object cadete {
-	method valor() { return 20000 }
+	method neto() { return 20000 }
 }
 
 object presidente {
-	method valor() { return 100000000 }
+	method neto() { return 100000000 }
+}
+// CATEGORIAS
+
+
+// RESULTADOS
+
+// Formas que tiene un objeto de conocer a otro
+// 1) globalmente -> hardcodeado
+// 2) atributo 
+// 3) parámetro
+// ó pedirselo a otro objeto que conoce
+object porcentaje {
+	method montoResultados(empleado) {
+		return empleado.sueldoNeto() * 0.1
+	}
 }
 
-// CATEGORIAS
+// El método lookup (que determina qué método responde a qué mensaje)
+// tiene en cuenta el nombre + cantidad de parámetros
+object montoFijo { 
+	method montoResultados(empleado) {
+		return 800
+	}
+}
+
+object nulo {
+	method montoResultados(empleado) {
+		return 0
+	}
+}
+// RESULTADOS
+
