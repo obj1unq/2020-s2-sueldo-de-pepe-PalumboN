@@ -16,6 +16,9 @@ object pepe {
 	method bonoPresentismo(nuevoBono) {
 		bonoPresentismo = nuevoBono
 	}
+	method faltar(dias) {
+		faltas += dias
+	}
 	method faltas() {
 		return faltas
 	}
